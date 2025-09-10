@@ -28,7 +28,7 @@ class RBot extends TelegramBot {
       !isCommands
         ? this.sendMessage(
             msg.chat.id,
-            "Sorry but I don't recognize the command you type 🙏\n If you're new to this bot please read this below.\n\nHere is the list of commands: \n/start - allow you to start acces the feature of this bot\n/menu - allow you to open the menu, there is also exist a good feature which there is not of the listing command\n/qoute - allow you to get qoute\n/news - allow you to get 5 news per request"
+            "Maaf perintah tidak dikenali, silahkan ketik /menu atau /start untuk melihat daftar perintah yang tersedia😊"
           )
         : "";
     });

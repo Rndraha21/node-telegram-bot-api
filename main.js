@@ -9,8 +9,4 @@ const options = {
 };
 
 const rbot = new RBot(token, options);
-rbot.getMenu();
-rbot.getStart();
-rbot.getQuote();
-rbot.getNews();
-rbot.getSticker();
+rbot.init()

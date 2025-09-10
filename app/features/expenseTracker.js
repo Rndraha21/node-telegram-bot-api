@@ -6,15 +6,15 @@ function expenseTracker(bot) {
     const chatId = query.message.chat.id;
 
     // Handle different callback query data
-    if (query.data === "Income" || query.data === "Expense") {
+    if (query.data === "Pemasukan" || query.data === "Pengeluaran") {
       bot.pendingActions[chatId] = { type: query.data, step: "amount" };
 
-      await bot.sendMessage(chatId, "Please enter the amount");
+      await bot.sendMessage(chatId, "Silahkan masukkan nominalnya:");
     } else if (query.data === "report") {
       if (bot.expenses.length === 0) {
-        await bot.sendMessage(chatId, "Income/expense not found 🤗");
+        await bot.sendMessage(chatId, "Catatan pemasukan atau pengeluaran mu tidak ditemukan 🤗");
       } else {
-        let report = "Balance report: \n";
+        let report = "Laporan keuangan: \n";
         let totalIncome = 0,
           totalExpense = 0;
 
@@ -30,25 +30,25 @@ function expenseTracker(bot) {
           report += `${i + 1}. ${e.type} ${formatted} - ${
             e.note
           } at ${e.date.toLocaleString("id-ID", options)}\n`;
-          if (e.type === "Income") totalIncome += e.amount;
+          if (e.type === "Pemasukan") totalIncome += e.amount;
           else totalExpense += e.amount;
         });
 
         const balance = totalIncome - totalExpense;
 
-        report += `\n💵 Total Income: ${formattedRupiah(
+        report += `\n💵 Total pemasukan: ${formattedRupiah(
           totalIncome
-        )}\n📤 Total Expense: ${formattedRupiah(
+        )}\n📤 Total pengeluaran: ${formattedRupiah(
           totalExpense
-        )}\n💰 Balance:${formattedRupiah(balance)}`;
+        )}\n💰 Selisih: ${formattedRupiah(balance)}`;
         await bot.sendMessage(chatId, report);
       }
     } else if (query.data === "clear") {
       if (bot.expenses.length === 0) {
-        bot.sendMessage(chatId, "Nothing to clear...");
+        bot.sendMessage(chatId, "Tidak ada catatan pemasukan/pengeluaran yang dapat dibersihkan...");
       } else {
         bot.expenses = [];
-        bot.sendMessage(chatId, "Clear note successfully 🗑️");
+        bot.sendMessage(chatId, "Catatan berhasil dibersihkan 🗑️");
       }
     }
 
@@ -68,13 +68,13 @@ function expenseTracker(bot) {
       if (isNaN(amount)) {
         return bot.sendMessage(
           chatId,
-          "Please enter the nominal amount correctly..."
+          "Silahkan masukan jumlah dengan benar..."
         );
       }
 
       // Pending action to track the current step and data
       bot.pendingActions[chatId] = { ...action, amount, step: "note" };
-      return bot.sendMessage(chatId, "Enter the description");
+      return bot.sendMessage(chatId, "Masukkan catatan untuk transaksi ini:");
     }
 
     // Check if the current step is to add a note
@@ -93,7 +93,7 @@ function expenseTracker(bot) {
       delete bot.pendingActions[chatId];
       return bot.sendMessage(
         chatId,
-        `✅ ${action.type} ${formatted} ${note} successfully noted!`
+        `✅ ${action.type} ${formatted} ${note} berhasil ditambahkan!`
       );
     }
   };

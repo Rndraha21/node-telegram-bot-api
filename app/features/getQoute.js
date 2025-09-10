@@ -16,7 +16,7 @@ async function sendQuote(bot, chatId) {
     console.error(err);
     return bot.sendMessage(
       chatId,
-      "⚠️ Something went wrong, please try again later."
+      "⚠️ Ups... sory saya gagal mendapatkan quote untukmu."
     );
   }
 }

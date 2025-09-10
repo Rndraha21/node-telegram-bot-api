@@ -8,12 +8,12 @@ async function sendExpenseMenu(bot, chatId) {
     reply_markup: {
       inline_keyboard: [
         [
-          { text: "Add income 💵", callback_data: "Income" },
-          { text: "Expenses 📤", callback_data: "Expense" },
+          { text: "Pemasukan💵", callback_data: "Pemasukan" },
+          { text: "Pengeluaran 📤", callback_data: "Pengeluaran" },
         ],
         [
-          { text: "View report 📊", callback_data: "report" },
-          { text: "Clear 🗑️", callback_data: "clear" },
+          { text: "Laporan keuangan 📊", callback_data: "report" },
+          { text: "Bersihkan catatan 🗑️", callback_data: "clear" },
         ],
       ],
     },
@@ -23,7 +23,7 @@ async function sendExpenseMenu(bot, chatId) {
 // Main function to handle the menu feature
 function getMenu(bot) {
   bot.onText(/^\/menu$/i, (msg) => {
-    bot.sendMessage(msg.chat.id, "Choose the command below", {
+    bot.sendMessage(msg.chat.id, "Silahkan pilih menu di bawah ini", {
       reply_markup: {
         inline_keyboard: [
           [
@@ -53,10 +53,10 @@ function getMenu(bot) {
     else if (query.data === "help")
       await bot.sendMessage(
         chatId,
-        "List command: \n/menu\n/start\n/quote\n/news"
+        "Daftar perintah: \n/menu - masuk ke menu\n/start - memulai\n/quote - dapatkan quote\n/news - dapatkan 5 berita terbaru\n\nUntuk Expense Tracker Asistant, silahkan klik tombol 'Expense Tracker Asistant 💸' pada menu atau ketik /menu untuk membuka menu."
       );
     else if (query.data === "tracker") await sendExpenseMenu(bot, chatId);
-    
+
     // Answer the callback query to remove the loading state
     bot.answerCallbackQuery(query.id);
   });

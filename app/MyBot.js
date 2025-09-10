@@ -47,9 +47,10 @@ class RBot extends TelegramBot {
 
       for (let i = 0; i < 5; i++) {
         const news = data.posts[i];
-        const { image, title, headline, category, published_at } = news;
+        console.log(news)
+        const { image, title, headline, category, pusblised_at } = news;
         await this.sendPhoto(chatId, image, {
-          caption: `🚀 Category: ${category}\n📝 Title: ${title}\n\n🤖 Headline: ${headline}\n⬆️ Publish at: ${published_at}`,
+          caption: `🚀 Category: ${category}\n📝 Title: ${title}\n\n🤖 Headline: ${headline}\n⬆️ Publish at: ${pusblised_at}`,
         });
       }
     } catch (err) {
@@ -67,6 +68,7 @@ class RBot extends TelegramBot {
               { text: "Start 🚀", callback_data: "start" },
               { text: "Quote 🔗", callback_data: "quote" },
               { text: "News 📰", callback_data: "news" },
+              { text: "Expense Tracker Asistant 💸", callback_data: "expense" },
             ],
             [{ text: "Help ❓", callback_data: "help" }],
           ],

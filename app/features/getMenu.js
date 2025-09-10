@@ -2,6 +2,7 @@ const { sendNews } = require("./getNews");
 const { sendQuote } = require("./getQoute");
 const { sendStart } = require("./getStart");
 
+// Function to send the expense tracker menu
 async function sendExpenseMenu(bot, chatId) {
   bot.sendMessage(chatId, "Choose the option below", {
     reply_markup: {
@@ -19,6 +20,7 @@ async function sendExpenseMenu(bot, chatId) {
   });
 }
 
+// Main function to handle the menu feature
 function getMenu(bot) {
   bot.onText(/^\/menu$/i, (msg) => {
     bot.sendMessage(msg.chat.id, "Choose the command below", {
@@ -38,6 +40,7 @@ function getMenu(bot) {
     });
   });
 
+  // Handle callback queries from the inline keyboard
   bot.on("callback_query", async (query) => {
     const chatId = query.message.chat.id;
     const fullName = `${query.from.first_name} ${
@@ -53,7 +56,8 @@ function getMenu(bot) {
         "List command: \n/menu\n/start\n/quote\n/news"
       );
     else if (query.data === "tracker") await sendExpenseMenu(bot, chatId);
-
+    
+    // Answer the callback query to remove the loading state
     bot.answerCallbackQuery(query.id);
   });
 }

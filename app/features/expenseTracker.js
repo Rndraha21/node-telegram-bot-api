@@ -1,9 +1,11 @@
 const formattedRupiah = require("../utils/formatRupiah");
 
+// Main function to handle expense tracking feature
 function expenseTracker(bot) {
   bot.on("callback_query", async (query) => {
     const chatId = query.message.chat.id;
 
+    // Handle different callback query data
     if (query.data === "Income" || query.data === "Expense") {
       bot.pendingActions[chatId] = { type: query.data, step: "amount" };
 
@@ -53,11 +55,12 @@ function expenseTracker(bot) {
     bot.answerCallbackQuery(query.id);
   });
 
-  bot.on("message", (msg) => {
+  // Method to handle messages related to expense tracking
+  bot.handleExpenseMessage = (msg) => {
     const chatId = msg.chat.id;
     const action = bot.pendingActions[chatId];
 
-    if (!action) return;
+    if (!action) return false;
 
     if (action.step === "amount") {
       const amount = parseInt(msg.text, 10);
@@ -69,10 +72,12 @@ function expenseTracker(bot) {
         );
       }
 
+      // Pending action to track the current step and data
       bot.pendingActions[chatId] = { ...action, amount, step: "note" };
       return bot.sendMessage(chatId, "Enter the description");
     }
 
+    // Check if the current step is to add a note
     if (action.step === "note") {
       const note = msg.text;
       const formatted = formattedRupiah(action.amount);
@@ -83,13 +88,15 @@ function expenseTracker(bot) {
         note,
         date: new Date(),
       });
+
+      // Clear the pending action after completing the expense entry
       delete bot.pendingActions[chatId];
       return bot.sendMessage(
         chatId,
         `✅ ${action.type} ${formatted} ${note} successfully noted!`
       );
     }
-  });
+  };
 }
 
 module.exports = expenseTracker;

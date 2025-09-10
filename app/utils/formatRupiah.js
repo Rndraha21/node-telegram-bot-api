@@ -1,3 +1,4 @@
+// Format number to Indonesian Rupiah currency format
 function formattedRupiah(number) {
   return new Intl.NumberFormat("id-ID", {
     style: "currency",

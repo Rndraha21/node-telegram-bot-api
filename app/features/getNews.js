@@ -1,4 +1,5 @@
 async function sendNews(bot, chatId) {
+  // Fetch news from the API and send the top 5 news to the user
   const newsApi = process.env.NEWS_API;
   try {
     await bot.sendMessage(chatId, "⌛ Searching for news...");
@@ -26,6 +27,7 @@ async function sendNews(bot, chatId) {
   }
 }
 
+// Function to handle the /news command
 function getNews(bot) {
   bot.onText(/^\/news$/i, (msg) => sendNews(bot, msg.chat.id));
 }

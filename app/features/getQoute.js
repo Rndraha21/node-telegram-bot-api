@@ -1,4 +1,5 @@
 async function sendQuote(bot, chatId) {
+  // Fetch a random quote from the API and send it to the user
   const API_KEY = process.env.QUOTE_API;
   try {
     const response = await fetch("https://api.api-ninjas.com/v1/quotes?", {
@@ -20,6 +21,7 @@ async function sendQuote(bot, chatId) {
   }
 }
 
+// Function to handle the /quote command
 function getQuote(bot) {
   bot.onText(/^\/quote$/i, (msg) => sendQuote(bot, msg.chat.id));
 }

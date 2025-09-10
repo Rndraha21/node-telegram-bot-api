@@ -1,3 +1,4 @@
+// Function to send the welcome message when the user starts the bot
 async function sendStart(bot, chatId, fullName) {
   return bot.sendMessage(
     chatId,
@@ -5,6 +6,7 @@ async function sendStart(bot, chatId, fullName) {
   );
 }
 
+// Function to handle the /start command
 function getStart(bot) {
   bot.onText(/^\/start$/i, (msg) => {
     const fullName = `${msg.from.first_name} ${

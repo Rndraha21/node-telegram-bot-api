@@ -1,0 +1,23 @@
+{
+  "name": "mybot",
+  "version": "1.0.0",
+  "description": "My first bot",
+  "keywords": [
+    "bot",
+    "mybot",
+    "telegram",
+    "bot"
+  ],
+  "license": "ISC",
+  "author": "robin ndraha",
+  "type": "commonjs",
+  "main": "main.js",
+  "scripts": {
+    "dev": "nodemon main.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.2",
+    "node-telegram-bot-api": "^0.66.0"
+  }
+}

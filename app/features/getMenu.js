@@ -4,7 +4,7 @@ const { sendStart } = require("./getStart");
 
 // Function to send the expense tracker menu
 async function sendExpenseMenu(bot, chatId) {
-  bot.sendMessage(chatId, "Choose the option below", {
+  bot.sendMessage(chatId, "Silahkan pilih menu di bawah ini", {
     reply_markup: {
       inline_keyboard: [
         [

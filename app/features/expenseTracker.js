@@ -29,7 +29,7 @@ function expenseTracker(bot) {
 
           report += `${i + 1}. ${e.type} ${formatted} - ${
             e.note
-          } at ${e.date.toLocaleString("id-ID", options)}\n`;
+          } pada ${e.date.toLocaleString("id-ID", options)}\n`;
           if (e.type === "Pemasukan") totalIncome += e.amount;
           else totalExpense += e.amount;
         });

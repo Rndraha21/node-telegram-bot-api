@@ -2,7 +2,8 @@
 async function sendStart(bot, chatId, fullName) {
   return bot.sendMessage(
     chatId,
-    `Hello ${fullName} Saya adalah bot yang dibuat oleh Robin 🤗\nBerikut adalah perintah yang dapat kamu gunakan:\n\n/menu - kamu dapat membuka melihat menu yang interaktif serta fitur tambahan yang tidak ada dalam daftar perintah\n/start - kamu dapat berinteraksi dengan ku dengan perintah ini\n/quote - kamu bisa mendapatkan "quote" dengan perintah ini\n/news - kamu bisa mendapatkan 5 berita terbaru dengan perintah ini`
+    `Hello ${fullName}, aku bot buatan Robin 🤗\nBerikut perintah yang bisa kamu gunakan:\n\n/menu - buka menu interaktif & fitur tambahan\n/start - mulai berinteraksi dengan bot\n/quote - dapatkan kutipan inspiratif random\n/news - lihat 5 berita terbaru\n/weather - cek cuaca kota tertentu\n/article - cari ringkasan artikel Wikipedia
+`
   );
 }
 

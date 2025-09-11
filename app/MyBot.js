@@ -1,11 +1,13 @@
 const TelegramBot = require("node-telegram-bot-api");
-const { getNews } = require("./features/getNews");
 const { getStart } = require("./features/getStart");
 const { getQuote } = require("./features/getQoute");
 const getMenu = require("./features/getMenu");
 const getSticker = require("./features/getSticker");
 const expenseTracker = require("./features/expenseTracker");
 const commands = require("./libs/commands");
+const getWeather = require("./features/getWeather");
+const getArticle = require("./features/getArticle");
+const getNews = require("./features/getNews");
 
 // Extend the TelegramBot class to add custom properties and methods
 class RBot extends TelegramBot {
@@ -38,9 +40,11 @@ class RBot extends TelegramBot {
     getStart(this);
     getSticker(this);
     getQuote(this);
-    getNews(this);
     getMenu(this);
     expenseTracker(this);
+    getWeather(this);
+    getArticle(this);
+    getNews(this);
   }
 }
 

@@ -4,6 +4,8 @@ const commands = {
   qoute: /^\/quote$/i,
   news: /^\/news$/i,
   menu: /^\/menu$/i,
+  weather: /^\/weather/i,
+  search: /^\/article/i,
 };
 
 module.exports = commands;

@@ -53,7 +53,10 @@ function getMenu(bot) {
     else if (query.data === "help")
       await bot.sendMessage(
         chatId,
-        "Daftar perintah: \n/menu - masuk ke menu\n/start - memulai\n/quote - dapatkan quote\n/news - dapatkan 5 berita terbaru\n/weather - dapatkan kondisi cuaca (weather {kota})\n/article - dapatkan article (article {judul})\n\nUntuk Expense Tracker Asistant, silahkan klik tombol 'Expense Tracker Asistant 💸' pada menu atau ketik /menu untuk membuka menu."
+        "Daftar perintah: \n/menu - masuk ke menu\n/start - memulai\n/quote - dapatkan quote\n/news - dapatkan 5 berita terbaru\n/weather - dapatkan kondisi cuaca. Contoh: `/weather Jakarta`\n/article - dapatkan article. Contoh: `/article Jokowi`\n/translate - terjemahkan teks berdasarkan kode bahasa. Contoh: `/translate en`\n\nUntuk Expense Tracker Asistant, silahkan klik tombol 'Expense Tracker Asistant 💸' pada menu atau ketik /menu untuk membuka menu.",
+        {
+          parse_mode: "Markdown",
+        }
       );
     else if (query.data === "tracker") await sendExpenseMenu(bot, chatId);
 

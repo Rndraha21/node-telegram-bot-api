@@ -2,7 +2,7 @@
 async function sendStart(bot, chatId, fullName) {
   return bot.sendMessage(
     chatId,
-    `Hello ${fullName}, aku bot buatan Robin 🤗\nBerikut perintah yang bisa kamu gunakan:\n\n/menu - buka menu interaktif & fitur tambahan\n/start - mulai berinteraksi dengan bot\n/quote - dapatkan kutipan inspiratif random\n/news - lihat 5 berita terbaru\n/weather - cek cuaca kota tertentu\n/article - cari ringkasan artikel Wikipedia
+    `Hello ${fullName}, aku bot buatan Robin 🤗\nBerikut perintah yang bisa kamu gunakan:\n\n/menu - buka menu interaktif & fitur tambahan\n/start - mulai berinteraksi dengan bot\n/quote - dapatkan kutipan inspiratif random\n/news - lihat 5 berita terbaru\n/weather - cek cuaca kota tertentu\n/article - cari ringkasan artikel Wikipedia\n/translate - terjemahkan teks ke bahasa lain.
 `
   );
 }

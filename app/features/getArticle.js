@@ -1,7 +1,18 @@
 function getArticle(bot) {
-  bot.onText(/^\/article (.+)/, async (msg, match) => {
+  bot.onText(/^\/article(?:\s+(.+))?/, async (msg, match) => {
     const chatId = msg.chat.id;
     const keyword = match[1];
+
+    if (!keyword) {
+      bot.sendMessage(
+        chatId,
+        "❌ Format yang anda ketik salah.\nSilahkan coba: `/article Jokowi`",
+        {
+          parse_mode: "Markdown",
+        }
+      );
+      return;
+    }
 
     const url = `https://id.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(
       keyword

@@ -1,11 +1,21 @@
 function getWeather(bot) {
   const API_KEY = process.env.WEATHER_API_KEY;
 
-  bot.onText(/^\/weather (.+)/, async (msg, match) => {
+  bot.onText(/^\/weather(?:\s+(.+))?/, async (msg, match) => {
     const chatId = msg.chat.id;
 
     // Capture the city name
     const city = match[1];
+    if (!city) {
+      bot.sendMessage(
+        chatId,
+        "❌ Format salah.\nSilahkan coba: `/weather Jakarta`",
+        {
+          parse_mode: "Markdown",
+        }
+      );
+      return;
+    }
 
     // Fetch open weather api
     try {
@@ -13,6 +23,7 @@ function getWeather(bot) {
         `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric&lang=id`
       );
       const data = await response.json();
+
       const { description, icon } = data.weather[0];
       const { sys, name, main, wind } = data;
       const { temp, feels_like, humidity } = main;
@@ -44,7 +55,7 @@ function getWeather(bot) {
 
       const emotTemp = getTempEmoji(temp);
       const emotFeel = getTempEmoji(feels_like);
-      const emotHumidity = getHumidityEmoji(humidity)
+      const emotHumidity = getHumidityEmoji(humidity);
 
       const iconUrl = `https://openweathermap.org/img/wn/${icon}@2x.png`;
 
@@ -52,7 +63,10 @@ function getWeather(bot) {
         caption: `🌍 Cuaca di ${name}, ${sys.country}:\n\nKondisi: ${description} ${conditionMapEmot[description]}\nSuhu: ${temp}°C ${emotTemp}\nTerasa: ${feels_like}°C ${emotFeel}\nKelembapan: ${humidity}% ${emotHumidity}\nAngin: ${wind.speed}m/s 💨`,
       });
     } catch (error) {
-      bot.sendMessage(chatId, "Gagal mendapatkan informasi cuaca 🥲");
+      bot.sendMessage(
+        chatId,
+        "Gagal mendapatkan informasi cuaca, kota tidak ditemukan 🥲"
+      );
     }
   });
 }

@@ -8,6 +8,7 @@ const commands = require("./libs/commands");
 const getWeather = require("./features/getWeather");
 const getArticle = require("./features/getArticle");
 const getNews = require("./features/getNews");
+const getTranslate = require("./features/getTranslate");
 
 // Extend the TelegramBot class to add custom properties and methods
 class RBot extends TelegramBot {
@@ -19,20 +20,22 @@ class RBot extends TelegramBot {
 
     // Listen for messages and handle commands or expense tracking
     this.on("message", (msg) => {
-      if (this.handleExpenseMessage && this.handleExpenseMessage(msg)) {
-        return;
-      }
+      if (this.handleExpenseMessage && this.handleExpenseMessage(msg)) return;
+      if (this.handleTranslations && this.handleTranslations(msg)) return;
 
       // Check if the message matches any known commands
       const isCommands = Object.values(commands).some((command) =>
         command.test(msg.text)
       );
-      !isCommands
-        ? this.sendMessage(
-            msg.chat.id,
-            "Maaf perintah tidak dikenali, silahkan ketik /menu atau /start untuk melihat daftar perintah yang tersedia😊"
-          )
-        : "";
+
+      console.log(isCommands);
+
+      if (!isCommands) {
+        this.sendMessage(
+          msg.chat.id,
+          "Maaf perintah tidak dikenali, silahkan ketik /menu atau /start untuk melihat daftar perintah yang tersedia😊"
+        );
+      }
     });
   }
   // Method to initialize all bot features
@@ -45,6 +48,7 @@ class RBot extends TelegramBot {
     getWeather(this);
     getArticle(this);
     getNews(this);
+    getTranslate(this);
   }
 }
 

@@ -28,8 +28,8 @@ function formateDate(pubDate) {
     relative = "baru saja";
   } else if (diffMin < 60) {
     relative = `${diffMin} menit lalu`;
-  } else if (diffMin < 24) {
-    relative`${diffHour} jam lalu`;
+  } else if (diffHour < 24) {
+    relative = `${diffHour} jam lalu`;
   } else {
     relative = `${diffDay} hari lalu`;
   }

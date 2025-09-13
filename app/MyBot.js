@@ -9,6 +9,7 @@ const getWeather = require("./features/getWeather");
 const getArticle = require("./features/getArticle");
 const getNews = require("./features/getNews");
 const getTranslate = require("./features/getTranslate");
+const getHelp = require("./features/getHelp");
 
 // Extend the TelegramBot class to add custom properties and methods
 class RBot extends TelegramBot {
@@ -19,21 +20,19 @@ class RBot extends TelegramBot {
     this.pendingActions = {};
 
     // Listen for messages and handle commands or expense tracking
-    this.on("message", (msg) => {
+    this.on("message", async (msg) => {
       if (this.handleExpenseMessage && this.handleExpenseMessage(msg)) return;
-      if (this.handleTranslations && this.handleTranslations(msg)) return;
+      if (await this.handleTranslations(msg)) return;
 
       // Check if the message matches any known commands
       const isCommands = Object.values(commands).some((command) =>
         command.test(msg.text)
       );
 
-      console.log(isCommands);
-
       if (!isCommands) {
         this.sendMessage(
           msg.chat.id,
-          "Maaf perintah tidak dikenali, silahkan ketik /menu atau /start untuk melihat daftar perintah yang tersedia😊"
+          "Maaf perintah tidak dikenali, silahkan klik /menu atau /start untuk melihat daftar perintah yang tersedia😊"
         );
       }
     });
@@ -49,6 +48,7 @@ class RBot extends TelegramBot {
     getArticle(this);
     getNews(this);
     getTranslate(this);
+    getHelp(this)
   }
 }
 

@@ -15,7 +15,7 @@ async function getTranslate(bot) {
   const pendingTranslations = {};
   const langCodes = languageCodes;
 
-  bot.onText(/^\/translate(?:\s+(\w+))?$/, async (msg, match) => {
+  bot.onText(/^\/translate(?:\s+(.+))?$/, async (msg, match) => {
     const chatId = msg.chat.id;
 
     let lang;
@@ -25,18 +25,16 @@ async function getTranslate(bot) {
       lang = "id";
       await bot.sendMessage(
         chatId,
-        `Bahasa di set ke default: ${lang.toUpperCase()}\nKlik <a href="https://www.w3schools.com/tags/ref_language_codes.asp">disini</a> untuk melihat kumpulan kode bahasa`,
-        { parse_mode: "HTML" }
+        `Bahasa di set ke default: ${lang.toUpperCase()}`
       );
     }
 
     if (!langCodes[lang]) {
-      lang = "id";
       await bot.sendMessage(
         chatId,
-        `Kode bahasa tidak ditemukan, bahasa di set ke default ${lang.toUpperCase()}\nnKlik <a href="https://www.w3schools.com/tags/ref_language_codes.asp">disini</a> untuk melihat kumpulan kode bahasa`,
-        { parse_mode: "HTML" }
+        `Kode bahasa tidak ditemukan, klik /langcodes untuk melihat kode bahasa yang tersedia.`
       );
+      return;
     }
 
     pendingTranslations[chatId] = { step: "waitingText", lang };
@@ -67,6 +65,7 @@ async function getTranslate(bot) {
         await bot.sendMessage(chatId, "Proses selesai...");
 
         delete pendingTranslations[chatId];
+        return true;
       } catch (err) {
         console.error("error", err);
         bot.sendMessage(
@@ -74,8 +73,10 @@ async function getTranslate(bot) {
           "Format tidak sesuai, anda dapat menemukan petunjuk di `/start` atau `/menu help`",
           { parse_mode: "Markdown" }
         );
+        return true;
       }
     }
+    return false;
   };
 }
 

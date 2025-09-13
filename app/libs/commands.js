@@ -6,7 +6,8 @@ const commands = {
   menu: /^\/menu$/i,
   weather: /^\/weather(?:\s+(.+))?/,
   search: /^\/article(?:\s+(.+))?/,
-  translate: /^\/translate(?:\s+(\w+))?$/i,
+  translate: /^\/translate(?:\s+(.+))?$/i,
+  langcodes: /^\/langcodes$/,
 };
 
 module.exports = commands;
